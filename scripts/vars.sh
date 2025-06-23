@@ -7,7 +7,8 @@ SOURCE_DIR="$(realpath "$SCRIPT_DIR/..")"
 # LLVM/MLIR related paths
 LLVM_SOURCE_DIR="$HOME/llvm-project"
 LLVM_BUILD_DIR_RELEASE="$LLVM_SOURCE_DIR/build-release"
-LLVM_BUILD_DIR_DEBUG="$LLVM_SOURCE_DIR/build-debug"
+#LLVM_BUILD_DIR_DEBUG="$LLVM_SOURCE_DIR/build-debug"
+LLVM_BUILD_DIR_RELEASE="$LLVM_SOURCE_DIR/build-release"
 LLVM_INSTALL_DIR_RELEASE="$LLVM_BUILD_DIR_RELEASE"  # We install to build directory by default
 LLVM_INSTALL_DIR_DEBUG="$LLVM_BUILD_DIR_DEBUG"  # We install to build directory by default
 
