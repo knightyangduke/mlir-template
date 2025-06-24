@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13.4)
 
 project(standalone-dialect LANGUAGES CXX C)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 find_program(LLD_PATH NAMES lld)
 
 if (LLD_PATH)
