@@ -7,8 +7,7 @@ SOURCE_DIR="$(realpath "$SCRIPT_DIR/..")"
 # LLVM/MLIR related paths
 LLVM_SOURCE_DIR="$HOME/llvm-project"
 LLVM_BUILD_DIR_RELEASE="$LLVM_SOURCE_DIR/build-release"
-#LLVM_BUILD_DIR_DEBUG="$LLVM_SOURCE_DIR/build-debug"
-LLVM_BUILD_DIR_RELEASE="$LLVM_SOURCE_DIR/build-release"
+LLVM_BUILD_DIR_DEBUG="$LLVM_SOURCE_DIR/build-debug"
 LLVM_INSTALL_DIR_RELEASE="$LLVM_BUILD_DIR_RELEASE"  # We install to build directory by default
 LLVM_INSTALL_DIR_DEBUG="$LLVM_BUILD_DIR_DEBUG"  # We install to build directory by default
 
@@ -63,7 +62,7 @@ set_build_config() {
         MLIR_DIR="$LLVM_INSTALL_DIR/lib/cmake/mlir"
         LLVM_DIR="$LLVM_INSTALL_DIR/lib/cmake/llvm"
         LLVM_LIT="$LLVM_INSTALL_DIR/bin/llvm-lit"
-        CMAKE_BUILD_TYPE="$primary_type"
+	CMAKE_BUILD_TYPE="$primary_type"
     elif check_build_exists "$fallback_build_dir"; then
         echo "$warning_message"
         LLVM_BUILD_DIR="$fallback_build_dir"
@@ -71,7 +70,7 @@ set_build_config() {
         MLIR_DIR="$LLVM_INSTALL_DIR/lib/cmake/mlir"
         LLVM_DIR="$LLVM_INSTALL_DIR/lib/cmake/llvm"
         LLVM_LIT="$LLVM_INSTALL_DIR/bin/llvm-lit"
-        CMAKE_BUILD_TYPE="$fallback_type"
+	CMAKE_BUILD_TYPE="$primary_type"
     else
         echo "Error: No LLVM build found. Please run ./scripts/install.sh first."
         exit 1
