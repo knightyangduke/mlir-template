@@ -1,3 +1,4 @@
+#include "mlir/Dialect/Linalg/IR/Linalg.h"
 #include "mlir/IR/Dialect.h"
 #include "mlir/IR/MLIRContext.h"
 #include "mlir/InitAllDialects.h"
@@ -25,6 +26,8 @@ namespace {
 //
 // helper pass-pipeline to convert linalg -> linalg.generic_op
 void buildStandaloneDummyPipeline(mlir::OpPassManager &pm) {
+  pm.addPass(mlir::standalone::createStandaloneDummyPass());
+  pm.addPass(mlir::standalone::createStandaloneDummyCRLTransform());
   pm.addPass(mlir::createCanonicalizerPass());
   pm.addPass(mlir::createCSEPass());
 }
@@ -39,7 +42,8 @@ void registerStandalonePipelines() {
 /// TODO: AirDialect has issue, cannot find getTypeID impl, fix when needed
 inline void registerStandaloneDialects(mlir::DialectRegistry &registry) {
   // clang-format off
-  // registry.insert<mlir::standalone::StandaloneDialect>();
+  registry.insert<mlir::standalone::StandaloneDialect>();
+  registry.insert<mlir::linalg::LinalgDialect>();
   // clang-format on
 }
 

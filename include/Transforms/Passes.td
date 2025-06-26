@@ -27,5 +27,16 @@ def StandaloneDummyPass : Pass<"standalone-dummy-pass", "mlir::func::FuncOp"> {
   let dependentDialects = ["StandaloneDialect"];
 }
 
+def StandaloneDummyCRLTransform : Pass<"standalone-dummy-crl", "mlir::func::FuncOp"> {
+  let summary = "dummy pass replace a node with CRL node";
+  let constructor = "mlir::standalone::createStandaloneDummyCRLTransform()";
+  let options = [
+    //Option<"optionName", "option-name", "uint64_t", /*default=*/"512",
+    //       "Set the option for in KiB (default: 512)">,
+  ];
+  let dependentDialects = ["StandaloneDialect",
+                           "linalg::LinalgDialect"];
+}
+
 
 #endif // STANDALONE_PASSES

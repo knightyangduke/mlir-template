@@ -15,6 +15,7 @@ namespace standalone {
 
 // Declare your pass entry
 std::unique_ptr<OperationPass<mlir::func::FuncOp>> createStandaloneDummyPass();
+std::unique_ptr<OperationPass<mlir::func::FuncOp>> createStandaloneDummyCRLTransform() ;
 
 //===----------------------------------------------------------------------===//
 // Handle table-gen pass decls and registrations

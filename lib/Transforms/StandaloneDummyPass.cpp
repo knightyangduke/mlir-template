@@ -42,18 +42,56 @@ struct StandaloneDummyPattern
   // void getTileSizes(ArrayRef<AffineForOp> band,
   //                   SmallVectorImpl<unsigned> *tileSizes);
   // constexpr static unsigned kDefaultTileSize = 4;
+  
 };
 
 void StandaloneDummyPattern::runOnOperation() {
   // TODO: add your customised pattern implementation
+
+  func::FuncOp func = getOperation(); // You get a function op directly
+
+  llvm::outs() << "Running StandaloneDummyPattern on function: " << func.getName() << "\n";
+
+}
+
+/// A pass to perform loop tiling on all suitable loop nests of a Function.
+struct StandaloneDummyCRLTransformPattern
+    : public standalone::StandaloneDummyPassBase<StandaloneDummyCRLTransformPattern> {
+  explicit StandaloneDummyCRLTransformPattern() {
+    // TODO: add your pattern init code
+    // this->data-field-1 = kDefaultTileSize / 1024;
+  }
+
+  void runOnOperation() override;
+  // TODO: add your pattern data fields and methods
+  // void getTileSizes(ArrayRef<AffineForOp> band,
+  //                   SmallVectorImpl<unsigned> *tileSizes);
+  // constexpr static unsigned kDefaultTileSize = 4;
+  
+};
+
+void StandaloneDummyCRLTransformPattern::runOnOperation() {
+  // TODO: add your customised pattern implementation
+  
+  func::FuncOp func = getOperation(); // You get a function op directly
+
+  llvm::outs() << "Running Dummy CRL replacement on function: " << func.getName() << "\n";
 }
 
 } // namespace
+
+
 
 // bypass the implementation
 std::unique_ptr<OperationPass<mlir::func::FuncOp>>
 standalone::createStandaloneDummyPass() {
   return std::make_unique<StandaloneDummyPattern>();
+}
+
+// bypass the implementation
+std::unique_ptr<OperationPass<mlir::func::FuncOp>>
+standalone::createStandaloneDummyCRLTransform() {
+  return std::make_unique<StandaloneDummyCRLTransformPattern>();
 }
 
 } // namespace mlir
