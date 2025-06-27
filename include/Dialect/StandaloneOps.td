@@ -40,4 +40,17 @@ def Standalone_FooOp : Standalone_Op<"foo", [Pure,
     }];
 }
 
+def Standalone_CrlOp : Standalone_Op<"crl", [Pure,
+                                             SameOperandsAndResultType]> {
+    let summary = "Illustrates how to define an operation.";
+    let description = [{
+        A dummy crl op, representing some kind of call to a 3p function
+    }];
+
+    let arguments = (ins Variadic<AnyType>:$inputs);
+    let results = (outs Variadic<AnyType>:$outputs);
+
+    let assemblyFormat = "$inputs attr-dict `:` type($inputs) `->` type($outputs)";
+}
+
 #endif // STANDALONE_OPS
