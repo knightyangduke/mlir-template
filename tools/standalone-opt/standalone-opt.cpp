@@ -22,9 +22,12 @@
 #include "Dialect/StandaloneDialect.h"
 #include "Dialect/StandaloneOpsDialect.cpp.inc"
 
+#include "Transforms/Passes.h"
+#include "Pipeline/Pipelines.h"
+
 int main(int argc, char **argv) {
   mlir::registerAllPasses();
-  // TODO: Register standalone passes here.
+
 
   mlir::DialectRegistry registry;
   registry.insert<mlir::standalone::StandaloneDialect>();
@@ -34,6 +37,11 @@ int main(int argc, char **argv) {
   // include what you need like above. You only need to register dialects that
   // will be *parsed* by the tool, not the one generated
   // registerAllDialects(registry);
+
+  // TODO: Register standalone passes here.
+  //mlir::standalone::registerStandaloneDummyPass();
+  //mlir::standalone::registerStandaloneDummyCRLTransform();
+  mlir::standalone::bootstrapStandaloneCompiler(registry);
 
   return mlir::asMainReturnCode(
       mlir::MlirOptMain(argc, argv, "Standalone optimizer driver\n", registry));
