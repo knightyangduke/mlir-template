@@ -29,7 +29,7 @@ void buildStandaloneDummyPipeline(mlir::OpPassManager &pm) {
   pm.addPass(mlir::standalone::createStandaloneDummyPass());
   pm.addPass(mlir::standalone::createStandaloneDummyCRLTransform());
   //pm.addPass(mlir::createCanonicalizerPass());
-  //pm.addPass(mlir::createCSEPass());
+  //pm.addPass(mlir::createCSEPass());   
 }
 
 void registerStandalonePipelines() {
