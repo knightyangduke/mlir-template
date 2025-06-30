@@ -40,6 +40,22 @@ def Standalone_FooOp : Standalone_Op<"foo", [Pure,
     }];
 }
 
+def Standalone_UnaryOp : Standalone_Op<"unary", [Pure,
+                                             SameOperandsAndResultType]> {
+    let summary = "Illustrates how to define an operation.";
+    let description = [{
+        A dummy unary op, representing some kind of call to a 3p function
+    }];
+
+    let arguments = (ins I32:$input);
+    let results = (outs I32:$res);
+
+    let assemblyFormat = [{
+        $input attr-dict `:` type($input)
+    }];
+
+}
+
 def Standalone_CrlOp : Standalone_Op<"crl", [Pure,
                                              SameOperandsAndResultType]> {
     let summary = "Illustrates how to define an operation.";
@@ -51,6 +67,9 @@ def Standalone_CrlOp : Standalone_Op<"crl", [Pure,
     let results = (outs Variadic<AnyType>:$outputs);
 
     let assemblyFormat = "$inputs attr-dict `:` type($inputs) `->` type($outputs)";
+    //let assemblyFormat = [{
+    //    $inputs attr-dict `:` type($inputs)
+    //}];
 }
 
 #endif // STANDALONE_OPS
