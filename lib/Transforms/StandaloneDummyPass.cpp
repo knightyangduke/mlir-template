@@ -60,6 +60,7 @@ struct FooToDummyCrlPattern : public RewritePattern  {
   FooToDummyCrlPattern(PatternBenefit benefit, MLIRContext *context)
       : RewritePattern(MatchAnyOpTypeTag(), benefit, context) {}
   LogicalResult matchAndRewrite(Operation* op, PatternRewriter &rewriter) const override {
+   
     if(!canBeReplaced(op)) {
       return failure();
     }
@@ -68,7 +69,8 @@ struct FooToDummyCrlPattern : public RewritePattern  {
     //auto newOp = rewriter.create<standalone::CrlOp>(
     //    op->getLoc(), op->getResults().getType(), op->getOperands());
 
-    auto newOp = rewriter.create<standalone::UnaryOp>(
+    llvm::outs() << "replacement function match is triggered" << "\n";
+    auto newOp = rewriter.create<standalone::CrlOp>(
         op->getLoc(), op->getResults().getType(), op->getOperands());
 
     // Replace the original foo op with the new bar op
@@ -78,7 +80,10 @@ struct FooToDummyCrlPattern : public RewritePattern  {
   }
 
   bool canBeReplaced(Operation* op) const {
-    return (op->getDialect()->getNamespace() == "standalone");
+    //return false;
+    //llvm::outs() << op->getDialect()->getNamespace() << "\n";
+    return (op->getDialect()->getNamespace() == "standalone" && 
+            !llvm::isa<standalone::CrlOp>(op));
   }
 };
 
